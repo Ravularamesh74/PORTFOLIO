@@ -23,7 +23,7 @@ const Career = () => {
               Developed a complete Library Management System with book tracking,
               student management, and issue/return functionality.
               <br />
-              🌐 librarymanagementsystem-lms.netlify.app
+              🌐 <a href="https://librarymanagementsystem-lms.netlify.app" target="_blank" rel="noopener noreferrer">librarymanagementsystem-lms.netlify.app</a>
             </p>
           </div>
 
@@ -39,7 +39,7 @@ const Career = () => {
               Built a responsive travel booking website with route information,
               contact details, and user-friendly navigation.
               <br />
-              🌐 mallikarjunatravels.netlify.app
+              🌐 <a href="https://mallikarjunatravels.netlify.app" target="_blank" rel="noopener noreferrer">mallikarjunatravels.netlify.app</a>
             </p>
           </div>
 
@@ -55,7 +55,7 @@ const Career = () => {
               Created a job portal platform where users can explore job listings
               and connect with opportunities.
               <br />
-              🌐 jobconnect-cj.netlify.app
+              🌐 <a href="https://jobconnect-cj.netlify.app" target="_blank" rel="noopener noreferrer">jobconnect-cj.netlify.app</a>
             </p>
           </div>
 
@@ -71,7 +71,7 @@ const Career = () => {
               Developed an educational platform providing structured learning
               resources and skill development materials.
               <br />
-              🌐 mastery-hub.netlify.app
+              🌐 <a href="https://mastery-hub.netlify.app" target="_blank" rel="noopener noreferrer">mastery-hub.netlify.app</a>
             </p>
           </div>
 
@@ -87,7 +87,7 @@ const Career = () => {
               Designed and developed a professional corporate website with modern
               UI/UX and responsive layout.
               <br />
-              🌐 bhashyam-developer.netlify.app
+              🌐 <a href="https://bhashyam-developer.netlify.app" target="_blank" rel="noopener noreferrer">bhashyam-developer.netlify.app</a>
             </p>
           </div>
 
@@ -103,7 +103,7 @@ const Career = () => {
               Built an e-commerce platform featuring product listing, shopping
               interface, and responsive design.
               <br />
-              🌐 show-shop.netlify.app
+              🌐 <a href="https://show-shop.netlify.app" target="_blank" rel="noopener noreferrer">show-shop.netlify.app</a>
             </p>
           </div>
 
