@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MdArrowOutward } from "react-icons/md";
 
 interface Props {
@@ -8,36 +8,90 @@ interface Props {
   link?: string;
 }
 
-const WorkImage = (props: Props) => {
-  const [isVideo, setIsVideo] = useState(false);
-  const [video, setVideo] = useState("");
-  const handleMouseEnter = async () => {
-    if (props.video) {
-      setIsVideo(true);
-      const response = await fetch(`src/assets/${props.video}`);
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      setVideo(blobUrl);
+const WorkImage = ({ image, alt, video, link }: Props) => {
+  const [isHover, setIsHover] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 🎥 CONTROL VIDEO PLAY/PAUSE
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isHover) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isHover]);
+
+  // 🧲 3D TILT EFFECT
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX = ((y / rect.height) - 0.5) * -10;
+    const rotateY = ((x / rect.width) - 0.5) * 10;
+
+    containerRef.current.style.transform = `
+      perspective(800px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.03)
+    `;
+  };
+
+  const resetTilt = () => {
+    if (containerRef.current) {
+      containerRef.current.style.transform =
+        "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
     }
   };
 
   return (
-    <div className="work-image">
+    <div
+      className="work-image"
+      ref={containerRef}
+      onMouseMove={handleMove}
+      onMouseLeave={() => {
+        setIsHover(false);
+        resetTilt();
+      }}
+      onMouseEnter={() => setIsHover(true)}
+    >
       <a
-        className="work-image-in"
-        href={props.link}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setIsVideo(false)}
+        href={link}
         target="_blank"
-        data-cursor={"disable"}
+        rel="noopener noreferrer"
+        className="work-image-in"
+        data-cursor="link"
       >
-        {props.link && (
-          <div className="work-link">
-            <MdArrowOutward />
-          </div>
+
+        {/* 🔥 VIEW OVERLAY */}
+        <div className={`view-overlay ${isHover ? "show" : ""}`}>
+          VIEW <MdArrowOutward />
+        </div>
+
+        {/* IMAGE */}
+        <img
+          src={image}
+          alt={alt}
+          className={`work-img ${isHover ? "fade-out" : ""}`}
+        />
+
+        {/* VIDEO */}
+        {video && (
+          <video
+            ref={videoRef}
+            className={`work-video ${isHover ? "show" : ""}`}
+            src={video}
+            muted
+            loop
+            playsInline
+          />
         )}
-        <img src={props.image} alt={props.alt} />
-        {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
       </a>
     </div>
   );
